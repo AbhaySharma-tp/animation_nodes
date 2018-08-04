@@ -31,7 +31,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
         
 
     def track_object(self, camera, camera_data, noise):
-        if camera_data.tracking_object:
+        if camera_data.tracking_object and camera:
             n = Vector((0.0,0.0,0.0))
             roll_noise = 0.0
             location = camera_data.tracking_object.location
@@ -47,18 +47,19 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
                 
 
     def camera_settings(self, camera, camera_data):
-        focus = 0.0
-        if camera_data.manual_focus is True:
-                focus = camera_data.focus + camera_data.shift_focus
-        elif camera_data.lock_track_focus is True:
-            if camera_data.tracking_object:
-                focus = self.evaluate_focus(camera_data.tracking_object.location, camera.location) + camera_data.shift_focus
-        elif camera_data.focus_object:
-            focus = self.evaluate_focus(camera_data.focus_object.location, camera.location) + camera_data.shift_focus
-                
-        else: focus = camera_data.focus + camera_data.shift_focus
+        if camera:
+            focus = 0.0
+            if camera_data.manual_focus is True:
+                    focus = camera_data.focus + camera_data.shift_focus
+            elif camera_data.lock_track_focus is True:
+                if camera_data.tracking_object:
+                    focus = self.evaluate_focus(camera_data.tracking_object.location, camera.location) + camera_data.shift_focus
+            elif camera_data.focus_object:
+                focus = self.evaluate_focus(camera_data.focus_object.location, camera.location) + camera_data.shift_focus
+                    
+            else: focus = camera_data.focus + camera_data.shift_focus
 
-        self.camera_focus(camera, focus)
+            self.camera_focus(camera, focus)
 
 
     def list_mode_aniamtions(self, spline_data_list, camera_data_list, global_camera_settings, camera, time, overshoot, noise):

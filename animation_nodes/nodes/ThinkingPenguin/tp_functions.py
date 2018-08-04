@@ -41,7 +41,7 @@ class TPFunctions(SplineEvaluationBase):
             if self.parameterType == "UNIFORM":
                 spline.ensureUniformConverter(self.resolution)
                 parameter = spline.toUniformParameter(parameter)
-            return spline.evaluate(parameter)
+            return spline.evaluatePoint(parameter)
         else:
             return Vector((0, 0, 0))
 

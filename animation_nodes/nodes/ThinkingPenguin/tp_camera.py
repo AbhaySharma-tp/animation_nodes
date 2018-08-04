@@ -5,15 +5,17 @@ from ...data_structures.tp_data_struct import CameraSettingsDataStructure
 class TPCamera(TPFunctions):
     
     def camera_focus(self, camera, focus):
-        bpy.data.cameras[camera.data.name].dof_distance = focus
+        if camera:
+            bpy.data.cameras[camera.data.name].dof_distance = focus
 
     def all_cam_settings(self, camera, global_camera_settings):
-        bpy.data.cameras[camera.data.name].cycles.aperture_type = "FSTOP"
-        bpy.data.cameras[camera.data.name].lens = global_camera_settings.focal_length 
-        bpy.data.cameras[camera.data.name].cycles.aperture_fstop = global_camera_settings.fstop
-        bpy.data.cameras[camera.data.name].sensor_width = global_camera_settings.sensor_size
-        bpy.data.cameras[camera.data.name].clip_start = global_camera_settings.clipping_start
-        bpy.data.cameras[camera.data.name].clip_end = global_camera_settings.clipping_end
+        if camera:
+            bpy.data.cameras[camera.data.name].cycles.aperture_type = "FSTOP"
+            bpy.data.cameras[camera.data.name].lens = global_camera_settings.focal_length 
+            bpy.data.cameras[camera.data.name].cycles.aperture_fstop = global_camera_settings.fstop
+            bpy.data.cameras[camera.data.name].sensor_width = global_camera_settings.sensor_size
+            bpy.data.cameras[camera.data.name].clip_start = global_camera_settings.clipping_start
+            bpy.data.cameras[camera.data.name].clip_end = global_camera_settings.clipping_end
 
 
     def camera_setting_list(self, global_camera_settings, camera_data_list):
