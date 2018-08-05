@@ -11,7 +11,8 @@ class TPFunctions(SplineEvaluationBase):
         diff = endvalue - startvalue 
         result = 0.0
         animating = False
-        if(time >= 0 and time <= duration):
+        """ if(time >= 0 and time <= duration): """
+        if(time >= 0):
             animating = True
             influence = (time / duration)
             influence = interpolation(influence)

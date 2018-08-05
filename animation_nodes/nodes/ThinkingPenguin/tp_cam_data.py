@@ -18,13 +18,20 @@ class TP_CameraDataNode(bpy.types.Node, AnimationNode):
         self.newInput("Interpolation", "Tracking Interpolation", "tracking_interpolation", hide = True)
         self.newInput("Interpolation", "Focus Interpolation", "focus_interpolation", hide = True)
         self.newInput("Camera Settings", "Camera Settings", "camera_settings", hide = True)
+        self.newInput("Boolean", "Fake Autofocus", "fake_autofocus", value = False, hide = True)
+        self.newInput("Float", "Pull Back", "fa_pull_back", hide = True)
+        self.newInput("Float", "FA Duration", "fa_duration", hide = True)
+        self.newInput("Float", "FA Delay", "fa_delay", hide = True)
+        self.newInput("Interpolation", "FA Interpolation", "fa_interpolation", hide = True)
         self.newOutput("Camera Data", "Camera Data", "camera_data")
         
 
 
 
     def execute(self, tracking_object, focus_object, lock_track_focus, manual_focus, focus, shift_focus,
-        roll, tracking_interpolation, focus_interpolation, camera_settings):
+        roll, tracking_interpolation, focus_interpolation, camera_settings, fake_autofocus, fa_pull_back, 
+        fa_duration, fa_delay, fa_interpolation):
         return CamDataStructure(tracking_object, focus_object, lock_track_focus, manual_focus, focus, shift_focus,
-            roll, tracking_interpolation, focus_interpolation, camera_settings)
+            roll, tracking_interpolation, focus_interpolation, camera_settings, fake_autofocus, fa_pull_back,
+            fa_duration, fa_delay, fa_interpolation)
         

@@ -12,7 +12,8 @@ class SplineDataStructure:
 
 class CamDataStructure:
     def __init__(self, tracking_object, focus_object, lock_track_focus, manual_focus, focus,
-        shift_focus, roll, tracking_interpolation, focus_interpolation, other_camera_settings):
+        shift_focus, roll, tracking_interpolation, focus_interpolation, other_camera_settings,
+        fake_autofocus, fa_pull_back, fa_duration, fa_delay, fa_interpolation):
         self.tracking_object = tracking_object
         self.focus_object = focus_object
         self.lock_track_focus = lock_track_focus
@@ -23,6 +24,12 @@ class CamDataStructure:
         self.tracking_interpolation = tracking_interpolation
         self.focus_interpolation = focus_interpolation
         self.other_camera_settings = other_camera_settings
+        self.fake_autofocus = fake_autofocus
+        self.fa_pull_back = fa_pull_back
+        self.fa_duration = fa_duration
+        self.fa_delay = fa_delay
+        self.fa_interpolation = fa_interpolation
+
 
 class TargetsDataStructure:
     def __init__(self, target_object, stay, transition):

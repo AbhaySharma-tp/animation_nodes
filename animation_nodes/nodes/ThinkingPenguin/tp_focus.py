@@ -4,12 +4,16 @@ class TPFocus():
         focus = (vec2 - vec1).length
         return focus
     
-    def focus_list(self, camera, camera_data_list):
+    def focus_list(self, camera, camera_data_list, time):
         if not camera:
             return
         focus_list = []
 
         for i in camera_data_list:
+
+            if i.fake_autofocus is True:
+                i.shift_focus -= self.fake_autofocus_m(i, time)
+
             if i.manual_focus is True:
                 focus_list.append(i.focus + i.shift_focus)
             elif i.lock_track_focus is True:
@@ -39,6 +43,26 @@ class TPFocus():
 
             if animating is True:
                 return animated_focus
+
+    def fake_autofocus_m(self, camera_data, time):
+        if camera_data.fa_duration == 0 : camera_data.fa_duration = 0.0001
+        if camera_data.fa_delay == 0 : camera_data.fa_delay == 0.0001
+        start = time - camera_data.fa_delay
+        focus = 0.0
+        
+        pull_back = self.animate(0.0, camera_data.fa_pull_back, camera_data.fa_duration/2, 
+            camera_data.fa_interpolation, camera_data.fa_delay, time)
+
+        original_focus = self.animate(pull_back, 0.0, camera_data.fa_duration/2, camera_data.fa_interpolation, 
+            (camera_data.fa_delay + (camera_data.fa_duration/2)), time)
+
+        if (start >= 0 and start <= (camera_data.fa_duration/2)):
+            return pull_back
+        else: return original_focus
+
+
+
+        
 
     
         

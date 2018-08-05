@@ -89,7 +89,7 @@ class TPCam01Node(bpy.types.Node, AnimationNode, TPSplineMode):
         
         if camera_data:
             self.track_object(camera, camera_data, noise)
-            self.camera_settings(camera, camera_data)
+            self.camera_settings(camera, camera_data, time)
             
         self.global_camera_settings(camera, global_cam_settings)
 
