@@ -50,7 +50,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
         if camera:
             focus = 0.0
             if camera_data.fake_autofocus is True:
-                camera_data.shift_focus -= self.fake_autofocus_m(camera_data, time)
+                camera_data.shift_focus -= self.fake_autofocus_m(camera_data, 0, time)
 
             if camera_data.manual_focus is True:
                     focus = camera_data.focus + camera_data.shift_focus
