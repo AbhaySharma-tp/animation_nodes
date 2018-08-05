@@ -28,6 +28,7 @@ class TP_SplineDataListSocket(bpy.types.NodeSocket, PythonListSocket):
     dataType = "Spline Data List"
     allowedInputTypes = ["Spline Data List"]
     baseDataType = "Spline Data"
+    baseType = TP_SplineDataSocket
     drawColor = (0.313,0.847,0.843, 0.5)
     storable = True
     comparable = False
