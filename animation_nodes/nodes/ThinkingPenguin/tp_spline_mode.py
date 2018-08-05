@@ -110,7 +110,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
         camera.rotation_euler.rotate_axis('Z', math.radians(final_roll))
 
         #camera focus
-        focus_list = self.focus_list(camera, camera_data_list, time)
+        focus_list = self.focus_list(camera, camera_data_list, delay, time)
         focus_on_path = self.focus_on_path(focus_list, delay, time)        
         tween_focus = self.tween_focus(spline_data_list, camera_data_list, focus_list, tween_delay, time)
         end_focus = focus_list[-1]
