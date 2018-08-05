@@ -28,6 +28,7 @@ class TP_CamDataListSocket(bpy.types.NodeSocket, PythonListSocket):
     dataType = "Camera Data List"
     allowedInputTypes = ["Camera Data List"]
     baseDataType = "Camera Data"
+    baseType = TP_CamdDataDataSocket
     drawColor = (0.8,1.0,0.796, 0.5)
     storable = True
     comparable = False
