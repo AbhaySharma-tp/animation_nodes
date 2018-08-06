@@ -9,8 +9,8 @@ class TP_OvershootNode(bpy.types.Node, AnimationNode):
 
     def create(self):
         self.newInput("Float", "Amplitute", "amplitude", value = 1.0)
-        self.newInput("Float", "Frequency", "frequency", value = 5)
-        self.newInput("Float", "Decay", "decay", value = 2, minValue = 0.001)
+        self.newInput("Float", "Frequency", "frequency", value = 1.0)
+        self.newInput("Float", "Decay", "decay", value = .1, minValue = 0.001, maxValue = 1)
 
         self.newOutput("Overshoot", "Overshoot", "overshoot")
         

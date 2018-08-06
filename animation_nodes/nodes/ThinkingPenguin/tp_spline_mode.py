@@ -16,18 +16,21 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
 
         parameter = self.animate(0,1,spline_data.duration, spline_data.interpolation, 0, time)
         camera.location = self.execute_pos(spline_data.spline, parameter)
+        end_tangent = self.execute_rot(spline_data.spline, 1)
+        direction = end_tangent.normalized()
+        os = 0.0
         if time >= spline_data.duration:
-            camera.location = self.execute_pos(spline_data.spline, 1)
             if overshoot:
-                if spline_data.duration == 0:
-                    spline_data.duration = 0.001
-                start_vector = self.execute_pos(spline_data.spline, 0)
-                end_vector = self.execute_pos(spline_data.spline, 1)
-                os = self.overshoot(overshoot, time, 0, spline_data.duration, start_vector, end_vector) 
-                camera.location += os
+                os = self.overshoot_b(overshoot, spline_data, time, 0)
+                direction = Vector((direction[0]*os,direction[1]*os,direction[2]*os))
+                camera.location += direction 
+
+
 
         if noise:
             camera.location += noise.location_noise
+
+        return 
         
 
     def track_object(self, camera, camera_data, noise):

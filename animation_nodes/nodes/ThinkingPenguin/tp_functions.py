@@ -17,8 +17,7 @@ class TPFunctions(SplineEvaluationBase):
             influence = (time / duration)
             influence = interpolation(influence)
             result = startvalue + (diff * influence)
-  
-        #return result, animating
+
         return result
 
     def animate_r_bool(self,startvalue, endvalue, duration, interpolation, delay, time):
@@ -81,6 +80,22 @@ class TPFunctions(SplineEvaluationBase):
             return
         else: return out_list
 
+    
+    def find_spline_length(self, spline, start, end):
+        if spline.isEvaluable():
+            start = min(max(start, 0), 1)
+            end = min(max(end, 0), 1)
+
+            if start == 0 and end == 1:
+                # to get a more exact result on polysplines currently
+                return spline.getLength(self.resolution)
+
+            if self.parameterType == "UNIFORM":
+                spline.ensureUniformConverter(self.resolution)
+                start = spline.toUniformParameter(start)
+                end = spline.toUniformParameter(end)
+            return spline.getPartialLength(start, end, self.resolution)
+        return 0.0
 
 
 
