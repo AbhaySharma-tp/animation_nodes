@@ -20,8 +20,9 @@ class TP_Abstract(TPFunctions):
         if time >= delay:
             spline_len = self.find_spline_length(spline_data.spline, 0,1)
             speed = (spline_len / spline_data.duration)
-            out = speed * sin(time*overshoot_obj.frequency)/exp(time*overshoot_obj.decay) * (overshoot_obj.amplitude*spline_data.duration)
-        return out
+            duration = spline_data.duration
+            out = speed * sin((time-duration)*overshoot_obj.frequency*speed)/exp(time*overshoot_obj.decay) 
+        return out * overshoot_obj.amplitude * duration
 
 
     def overshoot_repeat(self, overshoot_obj, time, delay, spline_data_list):
