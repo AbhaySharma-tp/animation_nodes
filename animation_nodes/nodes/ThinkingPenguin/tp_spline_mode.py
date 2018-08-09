@@ -68,7 +68,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
             self.camera_focus(camera, focus)
 
 
-    def list_mode_aniamtions(self, spline_data_list, camera_data_list, global_camera_settings, camera, time, overshoot, noise):
+    def list_mode_animations(self, spline_data_list, camera_data_list, global_camera_settings, camera, time, overshoot, noise):
         if spline_data_list is None or camera_data_list is None:
             return
         delay = self.delay_list(spline_data_list)

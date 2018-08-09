@@ -55,13 +55,14 @@ class TPCam01Node(bpy.types.Node, AnimationNode, TPSplineMode):
     
     def execute_Spline_Data(self, camera, make_scene_camera, limits, spline_data, spline_data_list, camera_data, camera_data_list,
         overshoot, noise, global_cam_settings, time):  
+        if camera is None:
+            return
 
-        if camera:
-            if make_scene_camera is True:
-                bpy.context.scene.camera = camera   
-            if limits is True:
-                bpy.data.cameras[camera.data.name].show_limits = True 
-            else: bpy.data.cameras[camera.data.name].show_limits = False 
+        if make_scene_camera is True:
+            bpy.context.scene.camera = camera   
+        if limits is True:
+            bpy.data.cameras[camera.data.name].show_limits = True 
+        else: bpy.data.cameras[camera.data.name].show_limits = False 
      
         #validation
         spline_data_list = self.valid_list(spline_data_list)
@@ -93,7 +94,7 @@ class TPCam01Node(bpy.types.Node, AnimationNode, TPSplineMode):
             
         self.global_camera_settings(camera, global_cam_settings)
 
-        self.list_mode_aniamtions(spline_data_list, camera_data_list, global_cam_settings, camera, time, overshoot, noise)
+        self.list_mode_animations(spline_data_list, camera_data_list, global_cam_settings, camera, time, overshoot, noise)
 
         debug = ""
        
@@ -102,12 +103,14 @@ class TPCam01Node(bpy.types.Node, AnimationNode, TPSplineMode):
         
     def execute_simple(self, camera, make_scene_camera, limits, ref_camera, smoothness, 
         overshoot, noise, global_cam_settings, time):
-        if camera:
-            if make_scene_camera is True:
-                bpy.context.scene.camera = camera   
-            if limits is True:
-                bpy.data.cameras[camera.data.name].show_limits = True 
-            else: bpy.data.cameras[camera.data.name].show_limits = False
+        if camera is None:
+            return
+
+        if make_scene_camera is True:
+            bpy.context.scene.camera = camera   
+        if limits is True:
+            bpy.data.cameras[camera.data.name].show_limits = True 
+        else: bpy.data.cameras[camera.data.name].show_limits = False
 
         self.global_camera_settings(camera, global_cam_settings)
 
