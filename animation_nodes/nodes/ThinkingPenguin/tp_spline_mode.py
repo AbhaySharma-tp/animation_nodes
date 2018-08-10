@@ -100,17 +100,20 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
 
         final_track_location = self.switcher(tween_track_location, track_location_on_path, end_track_location)
         vec_diff = final_track_location - camera.location
+
+        roll_noise = 0.0
         if noise:
             n = Vector((1.0,1.0,0.0))
             final_noise = Vector((noise.track_noise[0]*n[0],noise.track_noise[1]*n[1],noise.track_noise[2]*n[2]))
             vec_diff += final_noise
+            roll_noise = noise.roll_noise
         
         camera.rotation_euler = vec_diff.to_track_quat('-Z', 'Y').to_euler() 
 
         roll_path = self.roll_on_path(camera_data_list, delay, time)
         tween_roll = self.roll_tween(spline_data_list, camera_data_list,tween_delay, time)
         final_roll = self.switcher(tween_roll, roll_path, 0.0)
-        camera.rotation_euler.rotate_axis('Z', math.radians(final_roll))
+        camera.rotation_euler.rotate_axis('Z', math.radians(final_roll + roll_noise))
 
         #camera focus
         focus_list = self.focus_list(camera, camera_data_list, delay, time)
