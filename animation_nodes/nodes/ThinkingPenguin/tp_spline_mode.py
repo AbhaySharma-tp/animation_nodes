@@ -95,7 +95,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
         end_track_location = Vector((0,0,0))
         try:
             end_track_location = camera_data_list[-1].tracking_object.location
-        except: passs
+        except: pass
         else: end_track_location
 
         final_track_location = self.switcher(tween_track_location, track_location_on_path, end_track_location)
