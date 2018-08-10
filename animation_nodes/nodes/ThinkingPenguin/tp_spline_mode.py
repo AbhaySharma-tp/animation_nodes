@@ -84,7 +84,7 @@ class TPSplineMode(TP_Abstract, TPCamera, TPCamLocation, TPTrack, TPFocus, TPFun
 
         if overshoot:
             os = self.overshoot_repeat(overshoot, time, delay, spline_data_list)
-            camera.location += os
+            camera.location -= os
         
         if noise:
             camera.location += noise.location_noise
